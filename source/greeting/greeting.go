@@ -28,18 +28,13 @@ func Greet(salutation []Salutation, do Printer, isFormal bool, times int) {
 }
 
 func getPrefix(name string) (prefix string) {
-	switch name {
-	case "Mason":
-		prefix = "Mr. "
-	case "Sujoy":
-		prefix = "Dr. "
-	case "Allie":
-		prefix = "Ms. "
-	default:
-		prefix = "Dude "
+	prefixMap := map[string]string{
+		"Mason": "Mr. ",
+		"Sujoy": "Dr. ",
+		"Allie": "Ms. ",
 	}
 
-	return
+	return prefixMap[name]
 }
 
 func CreateMessage(name Name, greeting string) (message string, alternate string) {
