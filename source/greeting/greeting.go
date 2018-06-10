@@ -3,23 +3,46 @@ package greeting
 import "fmt"
 
 type Salutation struct {
-	Name     string
+	Name     Name
 	Greeting string
+}
+
+type Name struct {
+	FirstName string
+	LastName  string
 }
 
 type Printer func(string)
 
 func Greet(salutation Salutation, do Printer, isFormal bool) {
-	message, alternate := CreateMessage(salutation.Name, salutation.Greeting)
-	if isFormal {
+	if prefix := getPrefix(salutation.Name.FirstName); isFormal {
+		salutation.Name.LastName = prefix + salutation.Name.LastName
+		message, _ := CreateMessage(salutation.Name, salutation.Greeting)
 		do(message)
+	} else {
+		_, alternate := CreateMessage(salutation.Name, salutation.Greeting)
+		do(alternate)
 	}
-	do(alternate)
 }
 
-func CreateMessage(name string, greeting string) (message string, alternate string) {
-	message = greeting + " " + name
-	alternate = "HEY!" + " " + name
+func getPrefix(name string) (prefix string) {
+	switch name {
+	case "Mason":
+		prefix = "Mr. "
+	case "Sujoy":
+		prefix = "Dr. "
+	case "Allie":
+		prefix = "Ms. "
+	default:
+		prefix = "Dude "
+	}
+
+	return
+}
+
+func CreateMessage(name Name, greeting string) (message string, alternate string) {
+	message = greeting + " " + name.LastName
+	alternate = "HEY!" + " " + name.FirstName
 	return
 }
 
