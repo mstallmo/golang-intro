@@ -14,14 +14,16 @@ type Name struct {
 
 type Printer func(string)
 
-func Greet(salutation Salutation, do Printer, isFormal bool) {
-	if prefix := getPrefix(salutation.Name.FirstName); isFormal {
-		salutation.Name.LastName = prefix + salutation.Name.LastName
-		message, _ := CreateMessage(salutation.Name, salutation.Greeting)
-		do(message)
-	} else {
-		_, alternate := CreateMessage(salutation.Name, salutation.Greeting)
-		do(alternate)
+func Greet(salutation []Salutation, do Printer, isFormal bool, times int) {
+	for _, element := range salutation {
+		if prefix := getPrefix(element.Name.FirstName); isFormal {
+			element.Name.LastName = prefix + element.Name.LastName
+			message, _ := CreateMessage(element.Name, element.Greeting)
+			do(message)
+		} else {
+			_, alternate := CreateMessage(element.Name, element.Greeting)
+			do(alternate)
+		}
 	}
 }
 

@@ -4,9 +4,14 @@ import "./greeting"
 
 func main() {
 	mason := greeting.Name{FirstName: "Mason", LastName: "Stallmo"}
-	s := greeting.Salutation{Name: mason, Greeting: "Hello"}
 	allie := greeting.Name{FirstName: "Allie", LastName: "Heartsworm"}
-	t := greeting.Salutation{Name: allie, Greeting: "Hello"}
-	greeting.Greet(s, greeting.Println, true)
-	greeting.Greet(t, greeting.Println, true)
+	sujoy := greeting.Name{FirstName: "Sujoy", LastName: "Ganguly"}
+
+	slice := []greeting.Salutation{
+		{Name: mason, Greeting: "Hello"},
+		{Name: allie, Greeting: "Hi"},
+		{Name: sujoy, Greeting: "Sup"},
+	}
+
+	greeting.Greet(slice, greeting.Println, true, 0)
 }
