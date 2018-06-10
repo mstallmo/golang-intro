@@ -4,9 +4,30 @@ import (
 	"fmt"
 )
 
-func main() {
-	message := "Hello world.go variable"
-	a, b, c := 1, 2, 3
+type Salutation struct {
+	name     string
+	greeting string
+}
 
-	fmt.Println(message, a, b, c)
+const (
+	PI       = 3.14
+	Language = "Go"
+)
+
+const (
+	A = iota
+	B
+	C
+)
+
+func main() {
+	var s = Salutation{}
+	s.name = "Mason"
+	s.greeting = "Hello!"
+
+	fmt.Println(PI)
+	fmt.Println(Language)
+	fmt.Println(A)
+	fmt.Println(B)
+	fmt.Println(C)
 }
