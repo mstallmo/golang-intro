@@ -1,6 +1,10 @@
 package main
 
-import "./greeting"
+import (
+	"fmt"
+
+	"./greeting"
+)
 
 func RenameToFrog(r greeting.Renameable) {
 	r.Rename(greeting.Name{FirstName: "Frog", LastName: "McFroggerson"})
@@ -17,7 +21,7 @@ func main() {
 		{Name: sujoy, Greeting: "Sup"},
 	}
 
-	RenameToFrog(&salutations[0])
+	fmt.Fprintf(&salutations[0], "The count is %d", 10)
 
 	salutations.Greet(greeting.Println, false, 0)
 }

@@ -15,6 +15,14 @@ func (salutation *Salutation) Rename(newName Name) {
 	salutation.Name = newName
 }
 
+func (salutation *Salutation) Write(p []byte) (n int, err error) {
+	s := string(p)
+	salutation.Rename(Name{FirstName: s, LastName: s})
+	n = len(s)
+	err = nil
+	return
+}
+
 type Salutations []Salutation
 
 type Name struct {
