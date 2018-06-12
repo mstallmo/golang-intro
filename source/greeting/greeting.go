@@ -7,6 +7,11 @@ type Salutation struct {
 	Greeting string
 }
 
+type Name struct {
+	FirstName string
+	LastName  string
+}
+
 type Renameable interface {
 	Rename(newName Name)
 }
@@ -25,11 +30,6 @@ func (salutation *Salutation) Write(p []byte) (n int, err error) {
 
 type Salutations []Salutation
 
-type Name struct {
-	FirstName string
-	LastName  string
-}
-
 type Printer func(string)
 
 func (salutations Salutations) Greet(do Printer, isFormal bool, times int) {
@@ -43,6 +43,13 @@ func (salutations Salutations) Greet(do Printer, isFormal bool, times int) {
 			do(alternate)
 		}
 	}
+}
+
+func (salutations Salutations) ChannelGreeter(c chan Salutation) {
+	for _, s := range salutations {
+		c <- s
+	}
+	close(c)
 }
 
 func getPrefix(name string) (prefix string) {

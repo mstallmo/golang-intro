@@ -23,12 +23,10 @@ func main() {
 
 	fmt.Fprintf(&salutations[0], "The count is %d", 10)
 
-	done := make(chan bool)
-
-	go func() {
-		salutations.Greet(greeting.CreatePrintFunction(" <C>"), false, 0)
-		done <- true
-	}()
-	salutations.Greet(greeting.Println, false, 0)
-	<-done
+	c := make(chan greeting.Salutation)
+	go salutations.ChannelGreeter(c)
+	//Call a goroutine that will fill the channel
+	for s := range c {
+		fmt.Println(s.Name.FirstName)
+	}
 }
