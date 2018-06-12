@@ -7,6 +7,12 @@ type Salutation struct {
 	Greeting string
 }
 
+func (salutation *Salutation) Rename(newFirstName string, newLastName string) {
+	salutation.Name = Name{FirstName: newFirstName, LastName: newLastName}
+}
+
+type Salutations []Salutation
+
 type Name struct {
 	FirstName string
 	LastName  string
@@ -14,8 +20,8 @@ type Name struct {
 
 type Printer func(string)
 
-func Greet(salutation []Salutation, do Printer, isFormal bool, times int) {
-	for _, element := range salutation {
+func (salutations Salutations) Greet(do Printer, isFormal bool, times int) {
+	for _, element := range salutations {
 		if prefix := getPrefix(element.Name.FirstName); isFormal {
 			element.Name.LastName = prefix + element.Name.LastName
 			message, _ := CreateMessage(element.Name, element.Greeting)

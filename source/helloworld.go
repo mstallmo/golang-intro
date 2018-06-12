@@ -7,13 +7,13 @@ func main() {
 	allie := greeting.Name{FirstName: "Allie", LastName: "Heartsworm"}
 	sujoy := greeting.Name{FirstName: "Sujoy", LastName: "Ganguly"}
 
-	slice := []greeting.Salutation{
+	salutations := greeting.Salutations{
 		{Name: mason, Greeting: "Hello"},
 		{Name: allie, Greeting: "Hi"},
 		{Name: sujoy, Greeting: "Sup"},
 	}
 
-	slice = append(slice[:1], slice[2:]...)
+	salutations[0].Rename("Kevin", "Stallmo")
 
-	greeting.Greet(slice, greeting.Println, true, 0)
+	salutations.Greet(greeting.Println, true, 0)
 }
