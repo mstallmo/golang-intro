@@ -13,5 +13,7 @@ func main() {
 		{Name: sujoy, Greeting: "Sup"},
 	}
 
+	slice = append(slice[:1], slice[2:]...)
+
 	greeting.Greet(slice, greeting.Println, true, 0)
 }
