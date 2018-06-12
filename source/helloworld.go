@@ -2,6 +2,10 @@ package main
 
 import "./greeting"
 
+func RenameToFrog(r greeting.Renameable) {
+	r.Rename(greeting.Name{FirstName: "Frog", LastName: "McFroggerson"})
+}
+
 func main() {
 	mason := greeting.Name{FirstName: "Mason", LastName: "Stallmo"}
 	allie := greeting.Name{FirstName: "Allie", LastName: "Heartsworm"}
@@ -13,7 +17,7 @@ func main() {
 		{Name: sujoy, Greeting: "Sup"},
 	}
 
-	salutations[0].Rename("Kevin", "Stallmo")
+	RenameToFrog(&salutations[0])
 
-	salutations.Greet(greeting.Println, true, 0)
+	salutations.Greet(greeting.Println, false, 0)
 }
